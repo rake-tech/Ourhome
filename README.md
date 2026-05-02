@@ -1,0 +1,2 @@
+**“Our Home is a full-stack web application designed to support homeless individuals and orphanages by connecting users with real-world needs. The platform enables users to view awareness videos, upload cases with images and location details, explore orphanages, book food donations, and contribute financially. It was developed using Flask for backend processing, SQLite with SQLAlchemy for database management, and HTML, CSS.
+<img width="1920" height="899" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/8ef27bb1-ca81-4be8-890d-e937e0063aa0" />

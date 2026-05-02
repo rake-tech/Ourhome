@@ -1,0 +1,251 @@
+
+.page-shell {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 34px 24px 64px;
+  padding: 34px 24px 110px;
+}
+
+.auth-page {
+  padding: 48px clamp(24px, 7vw, 96px);
+}
+
+.single-auth {
+  grid-template-columns: minmax(320px, 460px);
+  justify-content: center;
+}
+
+.auth-copy {
+  color: #fff;
+  max-width: 680px;
+  padding: 0;
+}
+
+.align-left {
+  justify-self: start;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 18px;
+  margin-top: 4px;
+}
+
+.fund-box {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 14px;
+}
+
+.fund-box span,
+.fund-box a {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fund-box a {
+  color: var(--brand);
+}
+
+.affairs-reel {
+  display: grid;
+  gap: 16px;
+  grid-auto-columns: minmax(260px, 340px);
+  grid-auto-flow: column;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+}
+
+.affair-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  min-height: 230px;
+  padding: 18px;
+  scroll-snap-align: start;
+}
+
+.affair-card span {
+  color: var(--brand);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.affair-card h3 {
+  font-size: 22px;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.affair-card p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.video-grid,
+.reels-grid,
+.case-grid {
+  text-transform: capitalize;
+}
+
+.contact-strip {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px 12px;
+}
+
+.contact-strip a {
+  color: var(--brand);
+}
+
+.badge {
+  border-radius: 999px;
+  display: inline-flex;
+  padding: 22px;
+}
+
+.search-bar {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-bottom: 18px;
+  padding: 12px;
+}
+
+.mini-calendar {
+  display: grid;
+  gap: 8px;
+}
+
+.mini-calendar details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.mini-calendar summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.booked-day {
+  background: #fef3f2;
+  border-color: #fecdca !important;
+}
+
+.slot-list {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 10px;
+}
+
+.slot-list span {
+  background: #ecfdf3;
+  border-radius: 6px;
+  color: #027a48;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 8px;
+  text-align: center;
+}
+
+.slot-list .slot-booked {
+  background: #fee4e2;
+  color: var(--danger);
+}
+
+.bottom-nav {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  bottom: 16px;
+  box-shadow: var(--shadow);
+  display: none;
+  gap: 8px;
+  left: 50%;
+  max-width: 520px;
+  padding: 8px;
+  position: fixed;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  z-index: 20;
+}
+
+.bottom-nav a {
+  align-items: center;
+  border-radius: 10px;
+  color: var(--muted);
+  display: grid;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 800;
+  gap: 4px;
+  justify-items: center;
+  padding: 8px 4px;
+}
+
+.bottom-nav a:hover {
+  background: #f2f4f7;
+  color: var(--brand);
+}
+
+.bottom-nav svg {
+  height: 20px;
+  width: 20px;
+}
+
+.profile-grid {
+  display: grid;
+  gap: 18px;
+}
+
+@media (max-width: 920px) {
+  .app-header,
+  .nav-links,
+  .header-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px 24px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .bottom-nav {
+    display: flex;
+  }
+
+  .auth-hero,
+  .hero-grid,
+  .dashboard-grid {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .search-bar {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Profile | OurHome{% endblock %}
+
+{% block content %}
+<section class="page-title">
+  <div>
+    <span class="eyebrow">Profile</span>
+    <h1>{{ current_user.name }}</h1>
+    <p class="muted">{{ current_user.email }} · {{ current_user.mobile }} · {{ current_user.location }}</p>
+  </div>
+</section>
+
+<section class="profile-grid">
+  <article class="profile-section">
+    <h2>Your Cases</h2>
+    {% if user_cases %}
+      {% for case in user_cases %}
+        <div class="activity-item">
+          <strong>{{ case.location }}</strong>
+          <span>{{ case.description[:80] }}{% if case.description|length > 80 %}...{% endif %} · {{ case.status }} · {{ case.created_at.strftime("%d %b %Y") }}</span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No cases reported yet.</p>
+    {% endif %}
+  </article>
+
+  <article class="profile-section">
+    <h2>Your Donations</h2>
+    {% if donations %}
+      {% for donation in donations %}
+        <div class="activity-item">
+          <strong>Rs. {{ donation.amount }}</strong>
+          <span>{{ donation.purpose }} · {{ donation.created_at.strftime("%d %b %Y") }}</span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No donations recorded yet.</p>
+    {% endif %}
+  </article>
+
+  <article class="profile-section">
+    <h2>Your Bookings</h2>
+    {% if bookings %}
+      {% for booking in bookings %}
+        <div class="activity-item">
+          <strong>{{ booking.orphanage }}</strong>
+          <span>{{ booking.location }} · {{ booking.date }} · {{ booking.slot }}{% if booking.notes %} · {{ booking.notes }}{% endif %}</span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No bookings yet.</p>
+    {% endif %}
+  </article>
+</section>
+{% endblock %}
+

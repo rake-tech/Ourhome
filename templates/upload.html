@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Upload Case | OurHome{% endblock %}
+
+{% block content %}
+<section class="form-layout">
+  <div class="form-intro">
+    <span class="eyebrow">Upload</span>
+    <h1>Submit orphan welfare case</h1>
+    <p>Click or upload an image, add the location, and describe the condition.</p>
+  </div>
+  <form class="panel stacked-form" method="POST" enctype="multipart/form-data">
+    <label>Image<input type="file" name="image" accept=".png,.jpg,.jpeg,.webp" required></label>
+    <label>Location<input name="location" required></label>
+    <label>Condition<textarea name="condition" rows="6" required></textarea></label>
+    <label>Priority<select name="priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></label>
+    <button class="button button-primary" type="submit">Submit</button>
+  </form>
+</section>
+{% endblock %}

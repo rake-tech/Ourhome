@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | OurHome{% endblock %}
+
+{% block content %}
+<section class="hero-grid">
+  <div class="hero-panel">
+    <span class="eyebrow">OurHome Dashboard</span>
+    <h1>Current affairs, donations, and welfare actions in one place.</h1>
+    <p>Follow India disaster updates, watch embedded reels, donate through PM CARES, and coordinate orphanage support.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="{{ url_for('upload') }}">Upload case</a>
+      <a class="button button-secondary" href="{{ url_for('booking') }}">Book food slot</a>
+    </div>
+  </div>
+  <div class="impact-panel">
+    <div><span class="metric">{{ active_cases }}</span><span class="metric-label">Active cases</span></div>
+    <div><span class="metric">Rs. {{ total_donations }}</span><span class="metric-label">Donation records</span></div>
+    <div><span class="metric">{{ inactive_cases }}</span><span class="metric-label">Inactive cases</span></div>
+  </div>
+</section>
+
+<section class="dashboard-grid">
+  <article class="panel">
+    <div class="section-heading"><div><span class="eyebrow">PM CARES</span><h2>Donate to official account</h2></div></div>
+    <div class="fund-box">
+      <strong>PM CARES</strong>
+      <span>Account: 2121PM20202</span>
+      <span>IFSC: SBIN0000691</span>
+      <span>UPI: pmcares@sbi</span>
+      <a href="https://pmcares.gov.in/en/web/contribution/donate_india" target="_blank" rel="noopener">Open official payment page</a>
+    </div>
+    <form class="stacked-form" action="{{ url_for('donate') }}" method="POST">
+      <label>Amount<input type="number" name="amount" min="1" required></label>
+      <label>Purpose<select name="purpose"><option>general</option><option>flood relief</option><option>earthquake relief</option><option>orphan welfare</option></select></label>
+      <button class="button button-primary" type="submit">Save donation record</button>
+    </form>
+  </article>
+  <article class="panel">
+    <div class="section-heading"><div><span class="eyebrow">Your slots</span><h2>Upcoming bookings</h2></div></div>
+    <div class="list">
+      {% for booking in upcoming_bookings %}
+        <div class="list-row"><strong>{{ booking.orphanage }}</strong><span>{{ booking.location }} · {{ booking.date }} · {{ booking.slot }}</span></div>
+      {% else %}
+        <p class="muted">No slots booked yet.</p>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="section-heading"><div><span class="eyebrow">India current affairs</span><h2>Floods, earthquakes, tsunami and cyclone updates</h2></div></div>
+  <div class="affairs-reel">
+    {% for item in affairs %}
+      <a class="affair-card" href="{{ item.url }}" target="_blank" rel="noopener"><span>{{ item.source }}</span><h3>{{ item.title }}</h3><p>{{ item.summary }}</p></a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-heading"><div><span class="eyebrow">YouTube Data API</span><h2>Reels feed</h2></div></div>
+  <div class="reels-grid">
+    {% for video in videos %}
+      <article class="reel-card"><iframe title="OurHome reel {{ loop.index }}" src="https://www.youtube-nocookie.com/embed/{{ video }}?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe></article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-heading"><div><span class="eyebrow">Near you</span><h2>Recommended orphanages</h2></div></div>
+  <div class="partner-grid">
+    {% for partner in recommended_orphanages %}
+      <article class="partner-card">
+        {% if partner.rating %}<span class="badge badge-high">⭐ {{ partner.rating }}</span>{% endif %}
+        <h3>{{ partner.name }}</h3>
+        <p>{{ partner.address }}</p>
+        <a href="{{ partner.map_url }}" target="_blank" rel="noopener">View on Google Maps</a>
+      </article>
+    {% else %}
+      <p class="muted">No live recommendations available right now. Try searching in Enquiry.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Enquiry | OurHome{% endblock %}
+
+{% block content %}
+<section class="page-title">
+  <div>
+    <span class="eyebrow">Enquiry</span>
+    <h1>Search orphanages</h1>
+  </div>
+  <a class="button button-primary" href="{{ url_for('booking') }}">Book food slot</a>
+</section>
+
+<form class="search-bar" method="GET">
+  <input name="q" value="{{ search }}" placeholder="Search by orphanage, city, or area">
+  <button class="button button-primary" type="submit">Search</button>
+</form>
+
+<section class="partner-grid">
+  {% for partner in partners %}
+    <article class="partner-card">
+      {% if partner.rating %}<span class="badge badge-high">⭐ {{ partner.rating }}</span>{% else %}<span class="badge badge-medium">{{ partner.city }}</span>{% endif %}
+      <h2>{{ partner.name }}</h2>
+      <p>{{ partner.address or partner.location }}</p>
+      {% if partner.map_url %}
+        <a href="{{ partner.map_url }}" target="_blank" rel="noopener">View on Google Maps</a>
+      {% else %}
+        <a href="tel:{{ partner.contact }}">{{ partner.contact }}</a>
+      {% endif %}
+      <div class="mini-calendar">
+        {% for date_key in calendar_dates %}
+          {% set slots = booked_slots.get(partner.name, {}).get(date_key, []) %}
+          <details class="{{ 'booked-day' if slots else '' }}">
+            <summary>{{ date_key }}</summary>
+            <div class="slot-list">
+              {% for slot in ["Breakfast", "Lunch", "Dinner"] %}
+                <span class="{{ 'slot-booked' if slot in slots else '' }}">{{ slot }}</span>
+              {% endfor %}
+            </div>
+          </details>
+        {% endfor %}
+      </div>
+    </article>
+  {% else %}
+    <div class="empty-state"><h2>No orphanages found</h2><p>Try another location.</p></div>
+  {% endfor %}
+</section>
+{% endblock %}

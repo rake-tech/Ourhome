@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Cases | OurHome{% endblock %}
+
+{% block content %}
+<section class="page-title">
+  <div><span class="eyebrow">Data</span><h1>Uploaded cases</h1></div>
+  <a class="button button-primary" href="{{ url_for('upload') }}">Upload</a>
+</section>
+
+<div class="filter-bar">
+  <a class="{{ 'active' if status == 'active' else '' }}" href="{{ url_for('cases', status='active') }}">Active</a>
+  <a class="{{ 'active' if status == 'inactive' else '' }}" href="{{ url_for('cases', status='inactive') }}">Inactive</a>
+  <a class="{{ 'active' if status == 'all' else '' }}" href="{{ url_for('cases', status='all') }}">All</a>
+</div>
+
+<section class="case-grid">
+  {% for case in cases %}
+    <article class="case-card">
+      <img src="{{ case.image }}" alt="Case image">
+      <div class="case-content">
+        <div class="case-meta"><span class="badge badge-{{ case.priority }}">{{ case.priority }}</span><span>{{ case.status }}</span></div>
+        <h2>{{ case.location }}</h2>
+        <p>{{ case.description }}</p>
+        <div class="contact-strip"><span>{{ case.reporter.name }}</span><a href="tel:{{ case.reporter.mobile }}">{{ case.reporter.mobile }}</a></div>
+        <div class="case-footer">
+          <span>{{ case.created_at.strftime("%d %b %Y") }}</span>
+          {% if case.user_id == session['user_id'] and case.status == "active" %}
+            <form action="{{ url_for('archive_case', case_id=case.id) }}" method="POST"><button class="text-button" type="submit">Mark inactive</button></form>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+  {% else %}
+    <div class="empty-state"><h2>No cases found</h2><p>Upload a case to start.</p></div>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}OurHome{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script defer>window.addEventListener("DOMContentLoaded", () => lucide.createIcons());</script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">O</span><span>OurHome</span></a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="{{ url_for('dashboard') }}"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+      <a href="{{ url_for('upload') }}"><i data-lucide="camera"></i><span>Upload</span></a>
+      <a href="{{ url_for('cases') }}"><i data-lucide="database"></i><span>Cases</span></a>
+      <a href="{{ url_for('booking') }}"><i data-lucide="utensils"></i><span>Booking</span></a>
+      <a href="{{ url_for('enquiry') }}"><i data-lucide="search"></i><span>Enquiry</span></a>
+      <a href="{{ url_for('profile') }}"><i data-lucide="circle-user-round"></i><span>Profile</span></a>
+    </nav>
+    <a class="icon-button" href="{{ url_for('logout') }}" title="Logout" aria-label="Logout"><i data-lucide="log-out"></i></a>
+  </header>
+
+  <main class="page-shell">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main app actions">
+    <a href="{{ url_for('upload') }}"><i data-lucide="camera"></i><span>Upload</span></a>
+    <a href="{{ url_for('cases') }}"><i data-lucide="database"></i><span>Data</span></a>
+    <a href="{{ url_for('booking') }}"><i data-lucide="utensils"></i><span>Booking</span></a>
+    <a href="{{ url_for('enquiry') }}"><i data-lucide="search"></i><span>Enquiry</span></a>
+  </nav>
+</body>
+</html>
